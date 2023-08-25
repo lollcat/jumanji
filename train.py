@@ -71,6 +71,7 @@ def train(cfg: omegaconf.DictConfig, log_compiles: bool = False) -> None:
         out_var_name="metrics", num_steps_per_timing=num_steps_per_epoch
     )
 
+    @jax.jit
     def epoch_fn(training_state: TrainingState) -> Tuple[TrainingState, Dict]:
         def one_epoch_fn(
             training_state: TrainingState, x: Any
