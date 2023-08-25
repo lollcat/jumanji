@@ -92,6 +92,7 @@ def train(cfg: omegaconf.DictConfig, log_compiles: bool = False) -> None:
         training_state, metrics = jax.lax.scan(
             one_epoch_fn,
             training_state,
+            None,
             length=cfg.env.training.num_learner_steps_per_epoch,
         )
         metrics = jax.tree_util.tree_map(jnp.mean, metrics)
